@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="CalcuPro - Todas las calculadoras que necesitas">
+    <title>CalcuPro</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>🧮 CalcuPro</h1>
+        </header>
+
+        <!-- Vista: Home (Categorías) -->
+        <main id="home-view" class="view active">
+            <h2 class="section-title">Calculadoras</h2>
+            <div id="categories-grid" class="categories-grid">
+                <!-- Se generan dinámicamente -->
+            </div>
+        </main>
+
+        <!-- Vista: Categoría -->
+        <main id="category-view" class="view">
+            <button class="back-btn" onclick="showHome()">← Volver</button>
+            <h2 id="category-title" class="section-title"></h2>
+            <div id="calculators-grid" class="calculators-grid">
+                <!-- Se generan dinámicamente -->
+            </div>
+        </main>
+
+        <!-- Vista: Calculadora -->
+        <main id="calculator-view" class="view">
+            <button class="back-btn" onclick="showCategory()">← Volver</button>
+            <h2 id="calculator-title" class="section-title"></h2>
+            <div id="calculator-content" class="calculator-content">
+                <!-- Contenido de la calculadora -->
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('SW registrado', reg))
+                .catch(err => console.log('SW error', err));
+        }
+    </script>
+</body>
+</html>
