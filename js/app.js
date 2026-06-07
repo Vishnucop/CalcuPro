@@ -33,7 +33,7 @@ const calculatorsData = {
         ]
     },
     economia: {
-        icon: '🇦',
+        icon: '🇦🇷',
         name: 'Economía',
         calculators: [
             { id: 'inflacion-acumulada', name: 'Inflación acumulada' },
@@ -120,37 +120,29 @@ function showCalculator(calcId, calcName) {
 
 // Cargar calculadora dinámica
 function loadCalculator(calcId, container) {
-    // Aquí cargaremos las diferentes calculadoras
-    // Por ahora un ejemplo básico
-    container.innerHTML = `
-        <div class="form-group">
-            <label>Valor 1</label>
-            <input type="number" id="val1" placeholder="Ingresa un valor">
-        </div>
-        <div class="form-group">
-            <label>Valor 2</label>
-            <input type="number" id="val2" placeholder="Ingresa un valor">
-        </div>
-        <button class="btn-calculate" onclick="calculate('${calcId}')">Calcular</button>
-        <div id="result" class="result" style="display:none;">
-            <h3>Resultado</h3>
-            <div class="result-value" id="result-value"></div>
-        </div>
-    `;
-}
-
-// Función de cálculo genérica (se reemplazará en cada calculadora)
-function calculate(calcId) {
-    const val1 = parseFloat(document.getElementById('val1').value) || 0;
-    const val2 = parseFloat(document.getElementById('val2').value) || 0;
-    
-    let result = 0;
-    
-    // Ejemplo básico - esto se personalizará para cada calculadora
-    result = val1 + val2;
-    
-    document.getElementById('result-value').textContent = result.toFixed(2);
-    document.getElementById('result').style.display = 'block';
+    switch(calcId) {
+        case 'estandar':
+            if (typeof initCalculadoraEstandar === 'function') {
+                initCalculadoraEstandar(container);
+            } else {
+                container.innerHTML = '<p>Error: No se pudo cargar la calculadora</p>';
+            }
+            break;
+        case 'porcentajes':
+            container.innerHTML = '<p>Próximamente...</p>';
+            break;
+        case 'descuentos':
+            container.innerHTML = '<p>Próximamente...</p>';
+            break;
+        case 'iva':
+            container.innerHTML = '<p>Próximamente...</p>';
+            break;
+        case 'regla-tres':
+            container.innerHTML = '<p>Próximamente...</p>';
+            break;
+        default:
+            container.innerHTML = '<p>Calculadora en desarrollo...</p>';
+    }
 }
 
 // Navegación
