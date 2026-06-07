@@ -1,22 +1,29 @@
 const CACHE_NAME = 'calcupro-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/css/styles.css',
-    '/js/app.js',
-    '/js/calculators/basicas.js',
-    '/js/calculators/ventas.js',
-    '/js/calculators/costos.js',
-    '/js/calculators/economia.js',
-    '/js/calculators/negocios.js'
+    './',
+    './index.html',
+    './manifest.json',
+    './css/styles.css',
+    './js/app.js',
+    './icons/icon-192.png',
+    './icons/icon-512.png'
 ];
 
 // Instalar SW
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(urlsToCache))
+            .then(cache => {
+                console.log('Cache abierto');
+                return cache.addAll(urlsToCache.map(url => {
+                    return new Request(url, { cache: 'reload' });
+                }));
+            })
+            .catch(err => {
+                console.log('Error al cachear:', err);
+            })
     );
+    self.skipWaiting();
 });
 
 // Activar SW
@@ -32,6 +39,7 @@ self.addEventListener('activate', event => {
             );
         })
     );
+    self.clients.claim();
 });
 
 // Interceptar requests
@@ -42,7 +50,12 @@ self.addEventListener('fetch', event => {
                 if (response) {
                     return response;
                 }
-                return fetch(event.request);
+                return fetch(event.request).catch(() => {
+                    // Si está offline y no encuentra el recurso
+                    if (event.request.mode === 'navigate') {
+                        return caches.match('./index.html');
+                    }
+                });
             })
     );
 });
