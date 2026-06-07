@@ -77,6 +77,7 @@ body {
     background: #d1d5db;
 }
 
+
 /* Categories Grid */
 .categories-grid {
     display: grid;
@@ -156,6 +157,100 @@ body {
     min-height: 400px;
 }
 
+/* Calculadora Estándar */
+.calculator-standard {
+    background: #1f2937;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.display {
+    background: #111827;
+    color: #10b981;
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: right;
+    margin-bottom: 1rem;
+    min-height: 80px;
+    word-wrap: break-word;
+    word-break: break-all;
+    font-family: 'Courier New', monospace;
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 70px;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-number {
+    background: #374151;
+    color: white;
+}
+
+.btn-number:hover {
+    background: #4b5563;
+}
+
+.btn-function {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-function:hover {
+    background: #9ca3af;
+}
+
+.btn-operator {
+    background: #f59e0b;
+    color: white;
+}
+
+.btn-operator:hover {
+    background: #fbbf24;
+}
+
+.btn-equals {
+    background: #10b981;
+    color: white;
+    grid-column: span 2;
+}
+
+.btn-equals:hover {
+    background: #34d399;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .display {
+        font-size: 2rem;
+        padding: 1rem;
+    }
+    
+    .btn {
+        font-size: 1.2rem;
+        padding: 1rem;
+        min-height: 60px;
+    }
+}
 /* Form Elements */
 .form-group {
     margin-bottom: 1.5rem;
@@ -234,3 +329,4 @@ body {
         padding: 1rem;
     }
 }
+
